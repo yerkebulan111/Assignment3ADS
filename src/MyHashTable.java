@@ -19,15 +19,18 @@ public class MyHashTable<K, V> {
         }
         else if (key instanceof String) {
             int hash = 0;
-            for (int i = 0; i < ((String) key).length(); i++) {
-                hash += ((String) key).charAt(i) + (31 * hash);
+            char[] chars = (char[]) key;
+            int length = chars.length;
+            for (int i = 0; i < length; i++) {
+                hash += chars[i] + (31 * hash);
             }
             result = hash;
         }
-        else if (key instanceof int[]) {
+        else if (key instanceof Integer[]) {
             int hash = 0;
-            for (int i = 0; i < ((int[]) key).length; i++) {
-                hash += 31*hash + ((int[]) key)[i];
+            int length = ((Integer[]) key).length;
+            for (int i = 0; i < length; i++) {
+                hash += 31*hash + ((Integer[]) key)[i];
             }
             result = hash;
         }
@@ -60,7 +63,7 @@ public class MyHashTable<K, V> {
         int hash = hash(key);
         HashNode<K, V> current = chainArray[hash];
         while (current != null) {
-            if (current.key.equals(key)) {
+            if (current.key == key) {
                 return current.value;
             }
             current = current.next;
@@ -74,7 +77,7 @@ public class MyHashTable<K, V> {
         int hash = hash(key);
         HashNode<K, V> current = chainArray[hash];
         while (current != null) {
-            if (current.next.key.equals(key)) {
+            if (current.next.key == key) {
                 value = current.next.value;
                 current.next = current.next.next;
                 size--;
@@ -90,7 +93,7 @@ public class MyHashTable<K, V> {
         int hash = hash(key);
         HashNode<K, V> current = chainArray[hash];
         while (current != null) {
-            if (current.value.equals(value)) {
+            if (current.value == value) {
                 return true;
             }
             current = current.next;
@@ -104,7 +107,7 @@ public class MyHashTable<K, V> {
         for (int i = 0; i < M; i++) {
             current = chainArray[i];
             while (current != null) {
-                if (current.value.equals(value)) {
+                if (current.value == value) {
                     key = current.key;
                 }
                 current = current.next;
