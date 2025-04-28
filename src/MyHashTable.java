@@ -116,9 +116,13 @@ public class MyHashTable<K, V> {
         return key;
     }
 
+    public int getM() {
+        return M;
+    }
 
-
-
+    public HashNode<K,V>[] getChainArray() {
+        return chainArray;
+    }
 
 
     private class HashNode<K, V>{
