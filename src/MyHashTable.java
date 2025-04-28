@@ -125,7 +125,7 @@ public class MyHashTable<K, V> {
     }
 
 
-    private class HashNode<K, V>{
+    public static class HashNode<K, V>{
         private K key;
         private V value;
         private HashNode<K, V> next;
@@ -134,6 +134,11 @@ public class MyHashTable<K, V> {
             this.key = key;
             this.value = value;
         }
+
+        public HashNode<K, V> getNext() {
+            return next;
+        }
+
 
         @Override
         public String toString() {

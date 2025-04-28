@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class MyTestingClass {
     private int id;
     private String name;
@@ -9,20 +11,15 @@ public class MyTestingClass {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 31 * hash + id;
-        for (char c : name.toCharArray()) {
-            hash = 31 * hash + c;
-        }
-        return Math.abs(hash);
+        // Custom hashCode implementation based on fields
+        int result = 17;
+        result = 31 * result + id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 
-
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        MyTestingClass that = (MyTestingClass) obj;
-        return id == that.id && name.equals(that.name);
+    public String toString() {
+        return "MyTestingClass{id=" + id + ", name='" + name + "'}";
     }
 }
