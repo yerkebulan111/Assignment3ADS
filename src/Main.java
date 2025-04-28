@@ -1,13 +1,16 @@
 public class Main {
     public static void main(String[] args) {
-        MyHashTable<String, String> table = new MyHashTable<>();
+        MyBST<Integer, String> tree = new MyBST<>();
 
-        table.put("Yerkebulan", "Abdissattar");
-        table.put("Abai", "Kunanbai");
-        table.put("Alikhan", "Bokeikhan");
-        table.put("Magzhan", "Zhumabai");
-        table.put("Abai", "Marat");
+        tree.put(5, "Five");
+        tree.put(3, "Three");
+        tree.put(7, "Seven");
+        tree.put(2, "Two");
 
-        
+        System.out.println("Tree size: " + tree.size());
+
+        for (var elem : tree) {
+            System.out.println("Key is " + elem.getKey() + ", value is " + elem.getValue());
+        }
     }
 }
