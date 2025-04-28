@@ -1,13 +1,14 @@
 import java.util.Iterator;
 
 public class MyBST<K extends Comparable<K>, V> implements Iterable<MyBST<K, V>.NodePair> {
-    private Node root;
-    private int size = 0;
+    private Node<K,V> root;
+    private int size;
 
-    private class Node {
+
+    private static class Node<K,V> {
         private K key;
         private V value;
-        private Node left, right;
+        private Node<K,V> left, right;
 
         public Node(K key, V value) {
             this.key = key;
@@ -26,7 +27,7 @@ public class MyBST<K extends Comparable<K>, V> implements Iterable<MyBST<K, V>.N
 
         Node current = root;
         while (true) {
-            int cmp = key.compareTo(current.key);
+            int cmp = key.compareTo((K) current.key);
             if (cmp < 0) {
                 if (current.left == null) {
                     current.left = new Node(key, value);
@@ -51,8 +52,8 @@ public class MyBST<K extends Comparable<K>, V> implements Iterable<MyBST<K, V>.N
     public V get(K key) {
         Node current = root;
         while (current != null) {
-            int cmp = key.compareTo(current.key);
-            if (cmp == 0) return current.value;
+            int cmp = key.compareTo((K) current.key);
+            if (cmp == 0) return (V) current.value;
             else if (cmp < 0) current = current.left;
             else current = current.right;
         }
@@ -68,7 +69,7 @@ public class MyBST<K extends Comparable<K>, V> implements Iterable<MyBST<K, V>.N
         Node current = root;
 
         while (current != null) {
-            int cmp = key.compareTo(current.key);
+            int cmp = key.compareTo((K) current.key);
             if (cmp == 0) {
                 // case: two children
                 if (current.left != null && current.right != null) {
@@ -125,26 +126,28 @@ public class MyBST<K extends Comparable<K>, V> implements Iterable<MyBST<K, V>.N
     }
 
     private class Stack {
-        private Node[] data;
+        private Node<K, V>[] elements;
         private int size;
 
+        //@SuppressWarnings("unchecked")
         public Stack(int capacity) {
-            data = new Node[capacity];
+            elements = (Node<K, V>[]) new Node[capacity]; // Need cast
             size = 0;
         }
 
-        public void push(Node node) {
-            data[size++] = node;
+        public void push(Node<K, V> node) {
+            elements[size++] = node;
         }
 
-        public Node pop() {
-            return data[--size];
+        public Node<K, V> pop() {
+            return elements[--size];
         }
 
         public boolean isEmpty() {
             return size == 0;
         }
     }
+
 
     private class MyIterator implements Iterator<NodePair> {
         private Stack stack;
@@ -167,7 +170,7 @@ public class MyBST<K extends Comparable<K>, V> implements Iterable<MyBST<K, V>.N
                 current = current.left;
             }
             current = stack.pop();
-            NodePair pair = new NodePair(current.key, current.value);
+            NodePair pair = new NodePair((K) current.key, (V) current.value);
             current = current.right;
             return pair;
         }
