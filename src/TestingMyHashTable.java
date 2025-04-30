@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class TestHashTable {
+public class TestingMyHashTable {
     public static void main(String[] args) {
         MyHashTable<MyTestingClass, Employee> table = new MyHashTable<>();
         Random random = new Random();
@@ -16,7 +16,7 @@ public class TestHashTable {
         System.out.println();
         if (table.getChainArray() != null) {
             System.out.println("Number of elements in each bucket:");
-            for (int i = 0; i < table.getChainArray().length; i++) {
+            for (int i = 0; i < table.getM(); i++) {
                 int count = 0;
                 MyHashTable.HashNode<MyTestingClass, Employee> current = table.getChainArray()[i];
                 while (current != null) {

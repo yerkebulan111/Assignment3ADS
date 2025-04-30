@@ -1,4 +1,4 @@
-public class Main {
+public class TestingMyBST {
     public static void main(String[] args) {
         MyBST<Integer, String> tree = new MyBST<>();
 
