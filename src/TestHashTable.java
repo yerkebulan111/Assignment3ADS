@@ -5,13 +5,13 @@ public class TestHashTable {
         MyHashTable<MyTestingClass, Employee> table = new MyHashTable<>();
         Random random = new Random();
 
-/*
+
         for (int i = 0; i < 10000; i++) {
             MyTestingClass key = new MyTestingClass(random.nextInt(10000 * 2), "TestKey" + i);
             Employee value = new Employee(i, "Student" + i);
             table.put(key, value);
         }
-*/
+
 
         System.out.println();
         if (table.getChainArray() != null) {
