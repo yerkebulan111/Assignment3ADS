@@ -1,26 +1,32 @@
 import java.util.Random;
 
-public class HashTableTest {
+public class TestHashTable {
     public static void main(String[] args) {
-        MyHashTable<MyTestingClass, Student> table = new MyHashTable<>();
-        Random rand = new Random();
+        MyHashTable<MyTestingClass, Employee> table = new MyHashTable<>();
+        Random random = new Random();
 
-        // Add 10,000 elements to the hash table
+/*
         for (int i = 0; i < 10000; i++) {
-            MyTestingClass key = new MyTestingClass(rand.nextInt(1000), "Student" + i);
-            Student value = new Student("Student" + i);
+            MyTestingClass key = new MyTestingClass(random.nextInt(10000 * 2), "TestKey" + i);
+            Employee value = new Employee(i, "Student" + i);
             table.put(key, value);
         }
+*/
 
-        // Print the number of elements in each bucket
-        for (int i = 0; i < table.getM(); i++) {
-            int count = 0;
-            HashNode<MyTestingClass, Student> current = table.getChainArray()[i];
-            while (current != null) {
-                count++;
-                current = current.next;
+        System.out.println();
+        if (table.getChainArray() != null) {
+            System.out.println("Number of elements in each bucket:");
+            for (int i = 0; i < table.getChainArray().length; i++) {
+                int count = 0;
+                MyHashTable.HashNode<MyTestingClass, Employee> current = table.getChainArray()[i];
+                while (current != null) {
+                    count++;
+                    current = current.getNext();
+                }
+                System.out.println("Bucket " + i + ": " + count + " elements");
             }
-            System.out.println("Bucket " + i + " contains " + count + " elements.");
+        } else {
+            System.out.println("chainArray is null");
         }
     }
 }

@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public class MyTestingClass {
     private int id;
     private String name;
@@ -9,13 +7,29 @@ public class MyTestingClass {
         this.name = name;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+
     @Override
     public int hashCode() {
-        // Custom hashCode implementation based on fields
         int result = 17;
         result = 31 * result + id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (name == null ? 0 : name.hashCode());
         return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        MyTestingClass that = (MyTestingClass) obj;
+        return id == that.id;
     }
 
     @Override

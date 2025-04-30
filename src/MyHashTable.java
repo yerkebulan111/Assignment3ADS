@@ -37,7 +37,10 @@ public class MyHashTable<K, V> {
         else if (key instanceof Double) {
             result = (int) key;
         }
-        return result % M;
+        else if (key instanceof MyTestingClass) {
+            result = ((MyTestingClass) key).hashCode();
+        }
+        return getAbs(result % M);
     }
 
 
@@ -71,7 +74,7 @@ public class MyHashTable<K, V> {
         return null;
     }
 
-// 1 2 3 4 5
+
     public V remove(K key) {
         V value = null;
         int hash = hash(key);
@@ -121,7 +124,17 @@ public class MyHashTable<K, V> {
     }
 
     public HashNode<K,V>[] getChainArray() {
+        if (size == 0) {
+            return null;
+        }
         return chainArray;
+    }
+
+    private int getAbs(int x) {
+        if (x < 0) {
+            return -x;
+        }
+        return x;
     }
 
 

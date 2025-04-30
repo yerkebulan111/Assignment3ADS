@@ -7,6 +7,7 @@ public class Main {
         tree.put(7, "Seven");
         tree.put(2, "Two");
 
+        System.out.println();
         System.out.println("Tree size: " + tree.size());
 
         for (var elem : tree) {
